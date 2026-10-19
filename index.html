@@ -45,6 +45,16 @@ button{font-family:var(--font-body);cursor:pointer;border:none;}
 .topbar .sub{font-size:10px;color:var(--muted);font-family:var(--font-mono);letter-spacing:0.5px;}
 .topbar .budget{font-family:var(--font-mono);font-weight:700;font-size:15px;color:var(--green);}
 .topbar .budget-label{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.stat-chips{display:flex;gap:8px;align-items:stretch;}
+.stat-chip{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;padding:5px 10px;border-radius:8px;background:var(--surface2);border:1px solid var(--line);min-width:58px;}
+.stat-chip .chip-label{font-size:8px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:1px;}
+.stat-chip .chip-value{font-family:var(--font-mono);font-weight:700;font-size:14px;line-height:1.1;display:flex;align-items:center;gap:3px;}
+.stat-chip.budget-chip .chip-value{color:var(--green);}
+.stat-chip.pos-chip{border-color:var(--line);}
+.stat-chip.pos-chip.tier-gold{border-color:rgba(255,182,39,0.5);background:rgba(255,182,39,0.08);}
+.stat-chip.pos-chip.tier-gold .chip-value{color:var(--amber);}
+.stat-chip.pos-chip.tier-mid .chip-value{color:var(--green);}
+.stat-chip.pos-chip.tier-low .chip-value{color:var(--muted);}
 
 /* ---------- Bottom nav ---------- */
 .bottomnav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(10,13,17,0.97);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;max-width:640px;margin:0 auto;}
@@ -56,6 +66,7 @@ button{font-family:var(--font-body);cursor:pointer;border:none;}
 .nav-badge{position:absolute;top:-3px;right:-5px;width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 2px var(--bg);}
 
 .view{padding:16px 16px 24px;animation:fadein 0.25s ease;}
+.view.view-center{min-height:calc(100dvh - 150px);display:flex;flex-direction:column;justify-content:center;}
 @keyframes fadein{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
 
 /* ---------- Cards ---------- */
@@ -145,6 +156,38 @@ input[type=text],input[type=color]{background:var(--surface2);border:1px solid v
 .modal-box p{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:18px;}
 .modal-actions{display:flex;gap:10px;}
 .field-error{color:var(--red);font-size:12px;margin-top:8px;font-family:var(--font-mono);}
+@keyframes brakemove { from{left:0%;} to{left:calc(100% - 34px);} }
+.brake-track{position:relative;height:64px;background:linear-gradient(90deg,var(--surface3),var(--surface3) 85%,rgba(225,6,0,0.12));border-radius:8px;overflow:hidden;margin-bottom:16px;}
+.brake-zone{position:absolute;top:0;bottom:0;background:rgba(0,217,163,0.3);border-left:2px dashed var(--green);border-right:2px dashed var(--green);}
+.brake-car{position:absolute;top:14px;font-size:28px;line-height:1;}
+.brake-corner{position:absolute;right:6px;top:0;bottom:0;display:flex;align-items:center;font-size:22px;}
+.tire-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;padding:6px 0;}
+.tire-chip{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-family:var(--font-display);font-size:17px;border:3px solid transparent;cursor:pointer;position:relative;transition:transform .12s;}
+.tire-chip.active{border-color:var(--text);transform:scale(1.1);}
+.tire-chip .badge{position:absolute;bottom:-3px;right:-3px;width:16px;height:16px;border-radius:50%;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid var(--surface);}
+.tire-chip .badge.ok{background:var(--green);color:#04241c;}
+.tire-chip .badge.warn{background:var(--red);color:#fff;}
+.tire-caption{text-align:center;margin-top:8px;font-size:11px;font-weight:600;}
+.rivalry-vs{display:flex;align-items:stretch;gap:8px;margin-top:4px;}
+.rivalry-driver{flex:1;text-align:center;padding:14px 8px 12px;border-radius:10px;background:var(--surface2);border:2px solid var(--line);position:relative;transition:border-color .15s,background .15s;}
+.rivalry-driver.leader{border-color:var(--amber);background:rgba(255,182,39,0.08);}
+.rivalry-driver .crown-slot{height:18px;margin-bottom:2px;font-size:15px;}
+.rivalry-driver .rv-avatar{font-size:26px;line-height:1;margin-bottom:6px;}
+.rivalry-driver .rv-name{font-weight:700;font-size:12.5px;line-height:1.25;min-height:30px;display:flex;align-items:center;justify-content:center;}
+.rivalry-driver .rv-pts{font-family:var(--font-mono);color:var(--green);font-weight:700;font-size:15px;margin-top:6px;}
+.rivalry-driver .rv-h2h{font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-top:2px;letter-spacing:0.3px;}
+.rivalry-driver .rv-tap{font-size:9px;color:var(--muted2);margin-top:8px;text-transform:uppercase;letter-spacing:0.5px;}
+.rivalry-vs-badge{flex:none;align-self:center;font-family:var(--font-display);font-weight:900;font-size:13px;color:var(--red);background:var(--surface3);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);}
+.dominance-track{display:flex;height:10px;border-radius:5px;overflow:hidden;margin-top:14px;background:var(--surface3);}
+.dominance-seg{height:100%;transition:width .2s;}
+.dominance-caption{display:flex;justify-content:space-between;font-size:9px;color:var(--muted2);font-family:var(--font-mono);margin-top:4px;}
+.tension-banner{margin-top:12px;padding:10px 12px;border-radius:8px;font-size:11.5px;line-height:1.4;display:flex;align-items:flex-start;gap:8px;}
+.tension-banner.hot{background:linear-gradient(90deg,rgba(225,6,0,0.16),rgba(255,182,39,0.08));border:1px solid rgba(225,6,0,0.4);}
+.tension-banner.calm{background:var(--surface2);border:1px solid var(--line);color:var(--muted);}
+.tension-banner.hype{background:rgba(255,182,39,0.1);border:1px solid rgba(255,182,39,0.4);}
+.start-lights{display:flex;justify-content:center;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
+.start-light{width:38px;height:38px;border-radius:50%;background:var(--surface3);border:2px solid var(--line);transition:background 0.08s, box-shadow 0.08s;}
+.start-light.on{background:var(--red);border-color:var(--red);box-shadow:0 0 14px rgba(225,6,0,0.75);}
 .power-row{display:flex;align-items:center;gap:10px;padding:7px 0;}
 .power-row .prk{width:18px;font-family:var(--font-mono);font-size:11px;color:var(--muted);flex:none;}
 .power-row .pname{width:112px;flex:none;font-size:11.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -256,25 +299,47 @@ const POINTS = [25,18,15,12,10,8,6,4,2,1];
 /* Real-world companies as sponsor options. Values (payout, duration) are
    stylised for gameplay balance, not actual sponsorship figures. */
 const SPONSOR_POOL = [
- {id:'redbull',name:'Red Bull',industry:'Energy drink',base:3.0,duration:4},
- {id:'monster',name:'Monster Energy',industry:'Energy drink',base:2.6,duration:4},
- {id:'rolex',name:'Rolex',industry:'Luxury watches',base:3.4,duration:3},
- {id:'tag',name:'TAG Heuer',industry:'Luxury watches',base:2.8,duration:3},
- {id:'dhl',name:'DHL',industry:'Logistics',base:2.2,duration:6},
- {id:'pirelli',name:'Pirelli',industry:'Tyres',base:2.5,duration:5},
- {id:'shell',name:'Shell',industry:'Oil & fuel',base:2.7,duration:4},
- {id:'mobil1',name:'Mobil 1',industry:'Lubricants',base:2.0,duration:4},
- {id:'heineken',name:'Heineken',industry:'Beverages',base:2.3,duration:4},
- {id:'oracle',name:'Oracle',industry:'Cloud / Tech',base:3.2,duration:3},
- {id:'aws',name:'Amazon Web Services',industry:'Cloud / Tech',base:2.9,duration:5},
- {id:'lenovo',name:'Lenovo',industry:'Technology',base:2.1,duration:5},
- {id:'santander',name:'Santander',industry:'Banking',base:2.6,duration:3},
- {id:'emirates',name:'Emirates',industry:'Aviation',base:3.1,duration:6},
- {id:'puma',name:'Puma',industry:'Apparel',base:1.9,duration:4},
+ {id:'redbull',name:'Red Bull',industry:'Energy drink',base:3.0,duration:11},
+ {id:'monster',name:'Monster Energy',industry:'Energy drink',base:2.6,duration:11},
+ {id:'rolex',name:'Rolex',industry:'Luxury watches',base:3.4,duration:11},
+ {id:'tag',name:'TAG Heuer',industry:'Luxury watches',base:2.8,duration:11},
+ {id:'dhl',name:'DHL',industry:'Logistics',base:2.2,duration:11},
+ {id:'pirelli',name:'Pirelli',industry:'Tyres',base:2.5,duration:11},
+ {id:'shell',name:'Shell',industry:'Oil & fuel',base:2.7,duration:11},
+ {id:'mobil1',name:'Mobil 1',industry:'Lubricants',base:2.0,duration:11},
+ {id:'heineken',name:'Heineken',industry:'Beverages',base:2.3,duration:11},
+ {id:'oracle',name:'Oracle',industry:'Cloud / Tech',base:3.2,duration:11},
+ {id:'aws',name:'Amazon Web Services',industry:'Cloud / Tech',base:2.9,duration:11},
+ {id:'lenovo',name:'Lenovo',industry:'Technology',base:2.1,duration:11},
+ {id:'santander',name:'Santander',industry:'Banking',base:2.6,duration:11},
+ {id:'emirates',name:'Emirates',industry:'Aviation',base:3.1,duration:11},
+ {id:'puma',name:'Puma',industry:'Apparel',base:1.9,duration:11},
 ];
+const SPONSOR_HALF_SEASON = Math.round(CALENDAR.length/2); // 11 of 22 races
+
 
 const MAX_ACTIVE_SPONSORS = 3;
 const MAX_SPONSOR_OFFERS = 5;
+
+/* Bank loans: immediate cash now, repaid automatically race by race with interest.
+   Only one loan can be active at a time. */
+const LOAN_TIERS = [
+ {id:'small',  label:'Prestito Piccolo', amount:20, rate:0.15, term:8},
+ {id:'medium', label:'Prestito Medio',   amount:40, rate:0.22, term:10},
+ {id:'large',  label:'Prestito Grande',  amount:60, rate:0.30, term:12},
+];
+
+/* Title-rights investors: a one-time cash injection in exchange for their
+   name being bolted onto your team name for the rest of the season, real
+   F1-style ("Oracle Red Bull Racing", "Aramco Aston Martin"...). */
+const INVESTOR_POOL = [
+ {id:'oracle_inv',  name:'Oracle',           base:28},
+ {id:'aramco_inv',  name:'Aramco',           base:32},
+ {id:'petronas_inv',name:'Petronas',         base:26},
+ {id:'bwt_inv',     name:'BWT',              base:18},
+ {id:'mumm_inv',    name:'Mumm',             base:16},
+ {id:'kingdom_inv', name:'Kingdom Holding',  base:30},
+];
 
 const STAT_META = {
  aero:{label:'Aerodynamics',base:2.0},
@@ -288,6 +353,44 @@ const STRATEGIES = {
  balanced:{label:'Balanced',desc:'Even risk/reward',pace:0,variance:10,dnf:0},
  aggressive:{label:'Aggressive',desc:'More pace, more risk',pace:6,variance:17,dnf:1.8},
 };
+
+/* Weather: rolled independently for qualifying and for the race itself (real
+   F1 sessions often see different conditions). Each condition has a matching
+   tire category; using the wrong category is a serious mistake. */
+const WEATHERS = [
+ {id:'clear',     label:'Sereno',          icon:'☀️', tireCategory:'slick',        stress:0,   weight:5},
+ {id:'cloudy',    label:'Nuvoloso',        icon:'☁️', tireCategory:'slick',        stress:0.3, weight:3},
+ {id:'lightrain', label:'Pioggia Leggera', icon:'🌦️', tireCategory:'intermediate', stress:1.2, weight:1.4},
+ {id:'heavyrain', label:'Pioggia Intensa', icon:'🌧️', tireCategory:'wet',          stress:2.5, weight:0.6},
+];
+function pickWeather(){
+  const totalWeight = WEATHERS.reduce((s,w)=>s+w.weight,0);
+  let roll = Math.random()*totalWeight;
+  for(const w of WEATHERS){ if(roll < w.weight) return w.id; roll -= w.weight; }
+  return WEATHERS[0].id;
+}
+
+const TIRES = [
+ {id:'soft',         label:'Morbide',       short:'S',  category:'slick',        pace:4,  dnf:1.2, desc:'Massima aderenza, si consumano in fretta'},
+ {id:'medium',       label:'Medie',         short:'M',  category:'slick',        pace:0,  dnf:0,   desc:'Il compromesso standard'},
+ {id:'hard',         label:'Dure',          short:'H',  category:'slick',        pace:-3, dnf:-1.0,desc:'Meno grip, molto più durature'},
+ {id:'intermediate', label:'Intermedie',    short:'I',  category:'intermediate', pace:0,  dnf:0,   desc:'Per pista bagnata, non allagata'},
+ {id:'wet',          label:'Pioggia Piena', short:'W',  category:'wet',          pace:0,  dnf:0,   desc:'Per acquaplaning e pioggia intensa'},
+];
+// Using the wrong tire category for the conditions is a serious mistake
+// (slicks in the wet, wets on a dry track): big pace loss, much higher risk.
+function tireEffect(tireId, weatherId){
+  const tire = TIRES.find(t=>t.id===tireId) || TIRES.find(t=>t.id==='medium');
+  const weather = WEATHERS.find(w=>w.id===weatherId) || WEATHERS[0];
+  if(tire.category !== weather.tireCategory){
+    return { paceMod:-12, dnfMod:6, mismatch:true };
+  }
+  return { paceMod:tire.pace, dnfMod:tire.dnf, mismatch:false };
+}
+function tiresForWeather(weatherId){
+  const weather = WEATHERS.find(w=>w.id===weatherId) || WEATHERS[0];
+  return TIRES.filter(t=>t.category===weather.tireCategory);
+}
 
 /* Difficulty presets: pick a starting development level for the new team's car.
    Anchored against the real grid so the choice actually means something.
@@ -323,13 +426,27 @@ function freshState(){
   return {
     phase:'setup', // setup -> draft -> season
     activeTab:'home',
-    raceStage:'strategy', // strategy -> results (within a race weekend)
+    raceStage:'quali', // quali -> qualiResults -> strategy -> raceStart -> results (within a race weekend)
     team:{name:'',color:TEAM_COLORS[0]},
     budget:STARTING_BUDGET,
     season:1,
     raceIndex:0,
     drivers:[], // [driverId, driverId]
     strategies:{}, // driverId -> strategy key (per current race)
+    leadDriverId:null, // driverId designated as Prima Guida (team priority), or null
+    rivalry:{headToHead:{}}, // driverId -> races finished ahead of teammate, this season
+    qualiGrid:{}, // key -> starting grid position for the current race
+    qualiResults:null, // ordered array for display
+    skillStage:null, // 'quali' | 'race' | null, while a skill-check sequence is active
+    skillIndex:0,
+    skillTotal:0,
+    skillHits:0,
+    skillBonusQuali:0,
+    skillBonusRace:0,
+    qualiFirstLaunched:false, // gates Curva 1: car sits still until the player taps "Via!"
+    raceStartIndex:0, // 0 or 1, which of your 2 drivers is doing the start reaction test
+    raceStartResults:{}, // driverId -> {type, reactionMs} for this race's start
+    lastSponsorBonus:null, // {amount, label, hasPole} for the just-completed race, or null
     difficulty:'easy',
     car:{...DIFFICULTY_CAR_LEVELS.easy},
     aiTeams:[], // built at draft-confirm
@@ -343,6 +460,18 @@ function freshState(){
     confirmingReset:false,
     formError:'',
     previousDrivers:[],
+    customDrivers:{}, // id -> {id,name,nat,rating,cost} for reserve drivers signed mid-season
+    loan:null, // {tierId, principal, totalOwed, remainingOwed, remainingInstallments, installmentAmount}
+    titleInvestor:null, // {name, expiresAtSeason} while an active naming-rights deal is running
+    investorOffers:[],
+    lastDevelopmentEvents:[], // notable AI team development swings from the last race
+    qualiWeather:null, // weather id rolled for this race's qualifying session
+    raceWeather:null,  // weather id rolled for this race's race session
+    qualiTire:'medium', // single tire choice for the whole team's qualifying lap
+    raceTires:{}, // driverId -> tire id chosen for the race
+    pendingRescindDriverId:null, // driverId awaiting rescind confirmation, or null
+    seasonDriverIds:[], // every driverId who has driven for the team THIS season (incl. rescinded ones)
+    seasonRosterEvents:[], // [{outId,outName,outPts,inId,inName}] mid-season rescind+sign swaps this season
   };
 }
 
@@ -376,6 +505,36 @@ function migrateState(){
   if(state.formError === undefined) state.formError = '';
   if(state.difficulty === undefined) state.difficulty = 'hard'; // older saves always started at minimum power
   if(state.previousDrivers === undefined) state.previousDrivers = [...state.drivers];
+  if(state.qualiGrid === undefined) state.qualiGrid = {};
+  if(state.qualiResults === undefined) state.qualiResults = null;
+  if(state.skillStage === undefined) state.skillStage = null;
+  if(state.skillIndex === undefined) state.skillIndex = 0;
+  if(state.skillTotal === undefined) state.skillTotal = 0;
+  if(state.skillHits === undefined) state.skillHits = 0;
+  if(state.skillBonusQuali === undefined) state.skillBonusQuali = 0;
+  if(state.skillBonusRace === undefined) state.skillBonusRace = 0;
+  if(state.leadDriverId === undefined) state.leadDriverId = null;
+  if(state.rivalry === undefined || !state.rivalry.headToHead){ state.rivalry = {headToHead:{}}; }
+  state.drivers.forEach(id=>{ if(state.rivalry.headToHead[id] === undefined) state.rivalry.headToHead[id] = 0; });
+  // an in-progress race from before qualifying existed should skip straight to
+  // its existing stage rather than being forced back into a quali session
+  if(state.raceStage === undefined) state.raceStage = 'quali';
+  if(state.raceStartIndex === undefined) state.raceStartIndex = 0;
+  if(state.raceStartResults === undefined) state.raceStartResults = {};
+  if(state.lastSponsorBonus === undefined) state.lastSponsorBonus = null;
+  if(state.customDrivers === undefined) state.customDrivers = {};
+  if(state.loan === undefined) state.loan = null;
+  if(state.titleInvestor === undefined) state.titleInvestor = null;
+  if(state.investorOffers === undefined) state.investorOffers = [];
+  if(state.lastDevelopmentEvents === undefined) state.lastDevelopmentEvents = [];
+  if(state.qualiWeather === undefined) state.qualiWeather = null;
+  if(state.raceWeather === undefined) state.raceWeather = null;
+  if(state.qualiTire === undefined) state.qualiTire = 'medium';
+  if(state.raceTires === undefined) state.raceTires = {};
+  if(state.pendingRescindDriverId === undefined) state.pendingRescindDriverId = null;
+  if(state.qualiFirstLaunched === undefined) state.qualiFirstLaunched = false;
+  if(state.seasonDriverIds === undefined || !state.seasonDriverIds.length){ state.seasonDriverIds = [...state.drivers]; }
+  if(state.seasonRosterEvents === undefined) state.seasonRosterEvents = [];
   // older saves only tracked the player's own 2 drivers in the standings; backfill everyone else
   if((state.aiTeams||[]).length){ initAiDriverStandings(); }
 }
@@ -387,7 +546,7 @@ function updateUI(fn){ fn(state); render(); }
 
 /* =============================== HELPERS =============================== */
 function fmtM(n){ return '$'+ (Math.round(n*10)/10).toFixed(1) + 'M'; }
-function driverById(id){ return DRIVERS.find(d=>d.id===id); }
+function driverById(id){ return DRIVERS.find(d=>d.id===id) || (state && state.customDrivers && state.customDrivers[id]); }
 function myDrivers(){ return state.drivers.map(driverById); }
 
 function upgradeCost(stat, level){
@@ -421,6 +580,84 @@ function myConstructorPosition(){
   const arr = Object.entries(state.standingsConstructors).sort((a,b)=>b[1]-a[1]);
   const idx = arr.findIndex(e=>e[0]==='YOU');
   return idx===-1 ? arr.length+1 : idx+1;
+}
+
+// The name shown everywhere in the UI: base team name, with the title
+// investor's name bolted on the front for as long as that deal runs.
+function displayTeamName(){
+  const base = state.team.name || 'La tua Scuderia';
+  return state.titleInvestor ? `${state.titleInvestor.name} ${base}` : base;
+}
+
+/* =============================== BANK LOAN =============================== */
+function applyLoanRepayment(){
+  if(!state.loan) return;
+  const pay = Math.min(state.loan.installmentAmount, state.loan.remainingOwed);
+  state.budget -= pay;
+  state.loan.remainingOwed = Math.round((state.loan.remainingOwed - pay)*100)/100;
+  state.loan.remainingInstallments -= 1;
+  if(state.loan.remainingOwed<=0 || state.loan.remainingInstallments<=0){
+    state.loan = null;
+  }
+}
+
+/* =============================== TITLE INVESTORS =============================== */
+function refreshInvestorOffers(){
+  const pos = state.phase==='season' ? myConstructorPosition() : 6;
+  const totalTeams = (state.aiTeams.length||11) + 1;
+  const mult = pos<=Math.ceil(totalTeams*0.25) ? 1.4 : (pos<=Math.ceil(totalTeams*0.6) ? 1.0 : 0.7);
+  const shuffled = [...INVESTOR_POOL].sort(()=>Math.random()-0.5).slice(0,3);
+  state.investorOffers = shuffled.map(inv=>({
+    id:inv.id, name:inv.name,
+    amount: Math.round(inv.base*mult*(0.85+Math.random()*0.3)*10)/10
+  }));
+}
+
+/* =============================== MID-SEASON DRIVER MARKET =============================== */
+// Every real driver either races for a real team or is one of your two. Once
+// the season's AI rosters are locked in, the only people left to sign are the
+// handful of confirmed 2026 reserve/test drivers whose seat hasn't already
+// been activated by someone else poaching their team-mate.
+function reserveDescriptorByName(name){
+  for(const t of REAL_TEAMS){
+    const list = REAL_RESERVES[t.name] || [];
+    if(list.includes(name)){
+      const rating = Math.round(Math.max(58, t.rating - 12));
+      const cost = Math.max(4, Math.round(rating*0.22));
+      return { name, nat:'🏳️', rating, cost, tag:'Riserva '+t.name };
+    }
+  }
+  return null;
+}
+function slugifyReserveName(name){
+  return 'res_' + name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'');
+}
+function midSeasonMarketPool(excludeDriverId){
+  const usedNames = new Set();
+  state.aiTeams.forEach(t=>t.drivers.forEach(d=>usedNames.add(d.name)));
+  state.drivers.forEach(id=>{
+    if(id===excludeDriverId) return;
+    const d = driverById(id);
+    if(d) usedNames.add(d.name);
+  });
+  const fromMainPool = DRIVERS.filter(d=>!usedNames.has(d.name)).map(d=>({key:d.id, name:d.name, nat:d.nat, rating:d.rating, cost:d.cost, tag:'Svincolato'}));
+  const seen = new Set(fromMainPool.map(d=>d.name));
+  const fromReserves = [];
+  REAL_TEAMS.forEach(t=>{
+    (REAL_RESERVES[t.name]||[]).forEach(name=>{
+      if(usedNames.has(name) || seen.has(name)) return;
+      seen.add(name);
+      const desc = reserveDescriptorByName(name);
+      if(desc) fromReserves.push({key:name, ...desc});
+    });
+  });
+  return [...fromMainPool, ...fromReserves].sort((a,b)=>b.rating-a.rating);
+}
+
+// Can you actually afford to replace this driver if you let them go?
+function canAffordReplacementFor(driverId){
+  const pool = midSeasonMarketPool(driverId);
+  return pool.some(c=>c.cost <= state.budget);
 }
 
 function ensureAiTeams(){
@@ -466,15 +703,35 @@ function playerPower(){
 
 // Advance rival development a little after every race weekend (mimics real-world in-season upgrades).
 function advanceAiDevelopment(){
+  const events = [];
   state.aiTeams.forEach(t=>{
-    const step = 0.15 + Math.random()*0.55; // small steady gains, occasionally a bit more
-    t.power = Math.min(99, t.power + step);
+    const before = t.power;
+    const roll = Math.random();
+    let step, type;
+    if(roll < 0.12){
+      // failed update: the upgrade doesn't work out, sometimes it's even a step backwards
+      step = -0.35 + Math.random()*0.45;
+      type = 'bad';
+    } else if(roll < 0.85){
+      // normal, steady development
+      step = 0.15 + Math.random()*0.55;
+      type = 'normal';
+    } else {
+      // breakthrough: a real technical leap that can flip the order of the grid
+      step = 0.9 + Math.random()*1.4;
+      type = 'breakthrough';
+    }
+    t.power = Math.max(50, Math.min(99, t.power + step));
+    if(type!=='normal'){
+      events.push({ team:t.name, delta:Math.round((t.power-before)*100)/100, type });
+    }
   });
+  state.lastDevelopmentEvents = events;
 }
 
 function overallPowerRanking(){
   const rows = state.aiTeams.map(t=>({ name:t.name, power:Math.round(t.power*10)/10, you:false }));
-  rows.push({ name: state.team.name || 'La tua Scuderia', power: Math.round(playerPower()*10)/10, you:true });
+  rows.push({ name: displayTeamName(), power: Math.round(playerPower()*10)/10, you:true });
   return rows.sort((a,b)=>b.power-a.power);
 }
 
@@ -491,13 +748,73 @@ function refreshSponsorOffers(){
 }
 
 /* =============================== RACE SIMULATION =============================== */
+
+// Builds the base list of every car on the grid (you + all real AI teams) with
+// their car/driver rating for this track, shared by both qualifying and the race.
+function raceEntrants(track){
+  const list = [];
+  myDrivers().forEach(d=>{
+    list.push({team:'YOU', name:d.name, rating:d.rating, carScore:carRatingFor(track), driverId:d.id, key:d.id});
+  });
+  ensureAiTeams();
+  state.aiTeams.forEach(t=>{
+    t.drivers.forEach(dr=>{
+      list.push({team:t.name, name:dr.name, rating:dr.rating, carScore:t.power, driverId:null, key:dr.name});
+    });
+  });
+  return list;
+}
+
+// Qualifying: one clean, low-variance lap each. No strategy, no DNFs, just
+// car + driver pace. Sets the grid order used by the race that follows.
+function simulateQualifying(){
+  const track = CALENDAR[state.raceIndex];
+  const entrants = raceEntrants(track);
+  const scored = entrants.map(e=>{
+    const variance = (Math.random()*2-1) * 4; // tight, low-variance lap
+    const skillBonus = e.team==='YOU' ? (state.skillBonusQuali||0) : 0;
+    // AI teams always pick the sensible tire for conditions; only your choice can go wrong.
+    const tireMod = e.team==='YOU'
+      ? tireEffect(state.qualiTire, state.qualiWeather).paceMod
+      : tireEffect((WEATHERS.find(w=>w.id===state.qualiWeather)?.tireCategory==='slick') ? 'medium' : (tiresForWeather(state.qualiWeather)[0]||TIRES[1]).id, state.qualiWeather).paceMod;
+    const score = e.carScore*0.55 + e.rating*0.45 + variance + skillBonus + tireMod;
+    return {...e, score};
+  }).sort((a,b)=>b.score-a.score);
+
+  const grid = {};
+  const results = scored.map((e,i)=>{
+    grid[e.key] = i+1;
+    return {team:e.team, name:e.name, key:e.key, pos:i+1};
+  });
+  state.qualiGrid = grid;
+  state.qualiResults = results;
+  return results;
+}
+
+function raceStartBonus(driverId){
+  const rs = state.raceStartResults[driverId];
+  if(!rs) return 0;
+  switch(rs.type){
+    case 'jumpstart': return -6;   // false start: time penalty served during the race
+    case 'perfect':   return 1.5;  // reaction under 200ms: gets the jump on the field
+    case 'good':      return 0;    // solid, unremarkable start
+    case 'slow':      return -2;   // sluggish reaction, loses a little ground off the line
+    case 'verySlow':  return -4;   // very slow reaction, loses more ground
+    default:          return 0;
+  }
+}
+
 function simulateRace(){
   const track = CALENDAR[state.raceIndex];
   const entries = [];
+  const gridSize = raceEntrants(track).length;
   // my two drivers
   myDrivers().forEach(d=>{
     const strat = STRATEGIES[state.strategies[d.id] || 'balanced'];
-    entries.push(buildEntry('YOU', d.name, d.rating, carRatingFor(track), strat, track, d.id, d.id));
+    const leaderBonus = (state.leadDriverId===d.id) ? 2.5 : 0;
+    const startBonus = raceStartBonus(d.id);
+    const tire = tireEffect(state.raceTires[d.id] || 'medium', state.raceWeather);
+    entries.push(buildEntry('YOU', d.name, d.rating, carRatingFor(track), strat, track, d.id, d.id, gridSize, leaderBonus + startBonus + tire.paceMod, tire.dnfMod));
   });
   // AI teams (real 2026 grid constructors)
   ensureAiTeams();
@@ -505,7 +822,7 @@ function simulateRace(){
     const aiCarBase = t.power;
     t.drivers.forEach(dr=>{
       const strat = STRATEGIES.balanced;
-      entries.push(buildEntry(t.name, dr.name, dr.rating, aiCarBase, strat, track, null, dr.name));
+      entries.push(buildEntry(t.name, dr.name, dr.rating, aiCarBase, strat, track, null, dr.name, gridSize));
     });
   });
 
@@ -525,7 +842,9 @@ function simulateRace(){
     const pos = i+1;
     let pts = (!e.dnf && pos<=10) ? POINTS[pos-1] : 0;
     if(entries.indexOf(e)===flIdx && !e.dnf && pos<=10) pts += 1;
-    return {...e, pos, pts};
+    const startPos = state.qualiGrid[e.key] || null;
+    const startReaction = (e.team==='YOU' && e.driverId) ? state.raceStartResults[e.driverId] : null;
+    return {...e, pos, pts, startPos, startReaction};
   });
 
   // update standings
@@ -534,27 +853,66 @@ function simulateRace(){
     state.standingsConstructors[r.team] = (state.standingsConstructors[r.team]||0) + r.pts;
   });
 
+  // head-to-head: only counted when BOTH your drivers actually finish the race
+  const mine = results.filter(r=>r.team==='YOU');
+  if(mine.length===2 && !mine[0].dnf && !mine[1].dnf){
+    const winner = mine[0].pos < mine[1].pos ? mine[0] : mine[1];
+    state.rivalry.headToHead[winner.key] = (state.rivalry.headToHead[winner.key]||0) + 1;
+  }
+
   state.lastResults = results;
   return results;
 }
 
-function buildEntry(team, name, rating, carScore, strat, track, driverId, key){
+function buildEntry(team, name, rating, carScore, strat, track, driverId, key, gridSize, leaderBonus, tireDnfMod){
   const reliabilityLevel = driverId ? state.car.reliability : (6 + state.season*0.5);
   const baseDnf = Math.max(0.5, (11-reliabilityLevel)*0.9);
-  const dnfChance = Math.max(0.3, baseDnf + track.stress + strat.dnf);
+  const dnfChance = Math.max(0.3, baseDnf + track.stress + strat.dnf + (tireDnfMod||0));
   const dnf = (Math.random()*100) < dnfChance;
   const variance = (Math.random()*2-1) * strat.variance;
-  const score = carScore*0.55 + rating*0.45 + strat.pace + variance;
+  // starting further up the grid gives a real (but not decisive) race-pace edge:
+  // clean air, track position, fewer cars to fight through.
+  const gridPos = state.qualiGrid ? state.qualiGrid[key] : null;
+  const gridBonus = gridPos ? (gridSize - gridPos) * 0.35 : 0;
+  const skillBonus = team==='YOU' ? (state.skillBonusRace||0) : 0;
+  const score = carScore*0.55 + rating*0.45 + strat.pace + variance + gridBonus + skillBonus + (leaderBonus||0);
   return {team, name, rating, score, dnf, driverId, key};
 }
 
 /* =============================== SEASON / SPONSOR PAYOUT =============================== */
+// Determines this race's sponsor bonus tier from the player's own results.
+// Bonuses are expressed as a multiplier of each sponsor's base per-race value,
+// so a richer sponsor also pays a richer bonus.
+function sponsorBonusInfo(){
+  const mine = (state.lastResults||[]).filter(r=>r.team==='YOU' && !r.dnf);
+  const positions = mine.map(r=>r.pos).sort((a,b)=>a-b);
+  let tierMultiplier = 0, tierLabel = null;
+  if(positions.length===2 && positions[0]===1 && positions[1]===2){
+    tierMultiplier = 1.0; tierLabel = '🥇🥈 Doppietta 1-2!';
+  } else if(positions.includes(1)){
+    tierMultiplier = 0.6; tierLabel = '🏆 Vittoria di gara!';
+  } else if(positions.length===2 && positions[0]<=3 && positions[1]<=3){
+    tierMultiplier = 0.5; tierLabel = '🏅 Doppio podio!';
+  } else if(positions.some(p=>p<=3)){
+    tierMultiplier = 0.3; tierLabel = '🏁 Podio!';
+  }
+  const hasPole = state.drivers.some(id=>state.qualiGrid[id]===1);
+  const poleMultiplier = hasPole ? 0.15 : 0;
+  return { tierMultiplier, tierLabel, poleMultiplier, hasPole };
+}
+
 function applyRacePayouts(){
+  const info = sponsorBonusInfo();
+  const totalMultiplier = info.tierMultiplier + info.poleMultiplier;
+  let totalBonus = 0;
   state.activeSponsors.forEach(s=>{
-    state.budget += s.value;
+    const bonus = Math.round(s.value * totalMultiplier * 10)/10;
+    state.budget += s.value + bonus;
+    totalBonus += bonus;
     s.remaining -= 1;
   });
   state.activeSponsors = state.activeSponsors.filter(s=>s.remaining>0);
+  state.lastSponsorBonus = (totalBonus>0) ? { amount: Math.round(totalBonus*10)/10, label: info.tierLabel, hasPole: info.hasPole } : null;
 }
 
 function endSeason(){
@@ -563,20 +921,37 @@ function endSeason(){
   state.budget += prize;
   // Garage development is now permanent: no year-over-year reset or decay.
   // Whatever you've built stays built, season after season.
-  const bestDriver = [...state.drivers].sort((a,b)=>(state.standingsDrivers[b]||0)-(state.standingsDrivers[a]||0))[0];
+  // Consider EVERY driver who drove for the team this season, not just the
+  // final 2-driver lineup: a rescinded mid-season driver may well have been
+  // the team's top scorer and should still show up in the recap.
+  const seasonRoster = Array.from(new Set([...(state.seasonDriverIds||[]), ...state.drivers]));
+  const bestDriver = [...seasonRoster].sort((a,b)=>(state.standingsDrivers[b]||0)-(state.standingsDrivers[a]||0))[0];
   state.seasonHistory.push({
     season: state.season,
     teamPos: pos,
     teamPoints: Math.round(teamPointsSoFar('YOU')),
     prize,
-    bestDriver: bestDriver ? driverById(bestDriver).name : '-',
+    bestDriver: bestDriver ? (driverById(bestDriver) ? driverById(bestDriver).name : bestDriver) : '-',
     bestDriverPts: bestDriver ? (state.standingsDrivers[bestDriver]||0) : 0,
+    rosterChanges: (state.seasonRosterEvents||[]).filter(e=>e.inId), // only completed swaps
   });
   state.season += 1;
   state.raceIndex = 0;
   state.standingsDrivers = {};
   state.standingsConstructors = {};
   state.activeSponsors = [];
+  // Naming-rights deals only cover the season they were signed in; the team
+  // name reverts to normal unless a new investor is found next season.
+  state.titleInvestor = null;
+  state.investorOffers = [];
+  // Any loan not paid off carries into the new season with a rollover penalty:
+  // the remaining balance grows a bit and the term resets around what's left.
+  if(state.loan){
+    state.loan.remainingOwed = Math.round(state.loan.remainingOwed*1.1*10)/10;
+    state.loan.totalOwed = state.loan.remainingOwed;
+    state.loan.remainingInstallments = Math.max(state.loan.remainingInstallments, 4);
+    state.loan.installmentAmount = Math.round((state.loan.remainingOwed/state.loan.remainingInstallments)*10)/10;
+  }
   // Drivers already under contract are kept selected by default; the player
   // can swap either seat before the new season's AI rosters are finalised.
   state.previousDrivers = [...state.drivers];
@@ -617,7 +992,17 @@ const Actions = {
       s.budget -= total;
       s.drivers.forEach(id=>{ s.strategies[id]='balanced'; s.standingsDrivers[id]=0; });
       s.standingsConstructors['YOU']=0;
+      s.leadDriverId = null;
+      s.rivalry = {headToHead:{}};
+      s.drivers.forEach(id=>{ s.rivalry.headToHead[id]=0; });
+      s.qualiWeather = pickWeather();
+      s.raceWeather = pickWeather();
+      s.qualiTire = 'medium';
+      s.raceTires = {};
+      s.drivers.forEach(id=>{ s.raceTires[id] = 'medium'; });
       s.formError='';
+      s.seasonDriverIds = [...s.drivers];
+      s.seasonRosterEvents = [];
       ensureAiTeams();
       refreshSponsorOffers();
       s.phase='season';
@@ -643,23 +1028,186 @@ const Actions = {
     });
   },
   refreshOffers(){ update(s=>{ refreshSponsorOffers(); }); },
+  requestLoan(tierId){
+    update(s=>{
+      if(s.loan) return; // must repay the current loan first
+      const tier = LOAN_TIERS.find(t=>t.id===tierId);
+      if(!tier) return;
+      const totalOwed = Math.round(tier.amount*(1+tier.rate)*10)/10;
+      const installmentAmount = Math.round((totalOwed/tier.term)*10)/10;
+      s.budget += tier.amount;
+      s.loan = { tierId, principal:tier.amount, totalOwed, remainingOwed:totalOwed, remainingInstallments:tier.term, installmentAmount };
+    });
+  },
+  refreshInvestorOffers(){ update(s=>{ refreshInvestorOffers(); }); },
+  acceptInvestor(offerId){
+    update(s=>{
+      if(s.titleInvestor) return; // one naming deal at a time
+      const offer = s.investorOffers.find(o=>o.id===offerId);
+      if(!offer) return;
+      s.budget += offer.amount;
+      s.titleInvestor = { name: offer.name };
+      s.investorOffers = [];
+    });
+  },
   setStrategy(driverId, strat){
     update(s=>{ s.strategies[driverId] = strat; });
+  },
+  setQualiTire(tireId){
+    update(s=>{ s.qualiTire = tireId; });
+  },
+  setRaceTire(driverId, tireId){
+    update(s=>{ s.raceTires[driverId] = tireId; });
+  },
+  setLeadDriver(driverId){
+    update(s=>{ s.leadDriverId = (s.leadDriverId===driverId) ? null : driverId; });
+  },
+  requestRescind(driverId){
+    if(!canAffordReplacementFor(driverId)){
+      updateUI(s=>{ s.formError = 'Budget insufficiente per ingaggiare un sostituto: non puoi rescindere questo contratto ora.'; });
+      return;
+    }
+    updateUI(s=>{ s.pendingRescindDriverId = driverId; s.formError=''; });
+  },
+  cancelRescind(){
+    updateUI(s=>{ s.pendingRescindDriverId = null; });
+  },
+  confirmRescind(){
+    update(s=>{
+      const id = s.pendingRescindDriverId;
+      if(!id) return;
+      if(!canAffordReplacementFor(id)){ s.pendingRescindDriverId = null; s.formError = 'Budget insufficiente per ingaggiare un sostituto: non puoi rescindere questo contratto ora.'; return; }
+      const outName = driverById(id) ? driverById(id).name : id;
+      const outPts = s.standingsDrivers[id]||0;
+      s.drivers = s.drivers.filter(x=>x!==id);
+      if(s.leadDriverId===id){ s.leadDriverId = null; }
+      delete s.strategies[id];
+      s.pendingRescindDriverId = null;
+      // record the swap so the season-end recap and career history can show
+      // who was let go and who replaced them; inId/inName filled in once the
+      // replacement is actually signed via signMarketDriver.
+      s.seasonRosterEvents.push({ raceIndex:s.raceIndex, outId:id, outName, outPts, inId:null, inName:null });
+    });
+  },
+  signMarketDriver(key){
+    update(s=>{
+      if(s.drivers.length>=2) return;
+      const openEvent = [...s.seasonRosterEvents].reverse().find(e=>e.inId===null);
+      const existing = driverById(key);
+      if(existing){
+        if(existing.cost > s.budget) return;
+        s.budget -= existing.cost;
+        s.drivers.push(key);
+        s.strategies[key] = 'balanced';
+        if(s.standingsDrivers[key]===undefined) s.standingsDrivers[key]=0;
+        if(s.rivalry.headToHead[key]===undefined) s.rivalry.headToHead[key]=0;
+        if(s.raceTires[key]===undefined) s.raceTires[key]='medium';
+        if(!s.seasonDriverIds.includes(key)) s.seasonDriverIds.push(key);
+        if(openEvent){ openEvent.inId = key; openEvent.inName = existing.name; }
+        return;
+      }
+      const desc = reserveDescriptorByName(key);
+      if(!desc || desc.cost > s.budget) return;
+      const id = slugifyReserveName(desc.name);
+      s.customDrivers[id] = {id, name:desc.name, nat:desc.nat, rating:desc.rating, cost:desc.cost};
+      s.budget -= desc.cost;
+      s.drivers.push(id);
+      s.strategies[id] = 'balanced';
+      if(s.raceTires[id]===undefined) s.raceTires[id]='medium';
+      if(s.standingsDrivers[id]===undefined) s.standingsDrivers[id]=0;
+      if(s.rivalry.headToHead[id]===undefined) s.rivalry.headToHead[id]=0;
+      if(!s.seasonDriverIds.includes(id)) s.seasonDriverIds.push(id);
+      if(openEvent){ openEvent.inId = id; openEvent.inName = desc.name; }
+    });
+  },
+  goToQualiPrep(){
+    update(s=>{ s.raceStage = 'qualiPrep'; });
+  },
+  goToRaceStartPrep(){
+    update(s=>{ s.raceStage = 'raceStartPrep'; });
+  },
+  startSkillChecks(stage){
+    update(s=>{
+      s.skillStage = stage;
+      s.skillIndex = 0;
+      s.skillHits = 0;
+      s.skillTotal = stage==='quali' ? 5 : 10;
+      s.raceStage = stage==='quali' ? 'qualiSkill' : 'raceSkill';
+      s.qualiFirstLaunched = false;
+    });
+  },
+  launchFirstSkillCheck(){
+    update(s=>{ s.qualiFirstLaunched = true; });
+  },
+  recordSkillCheck(success){
+    update(s=>{
+      if(success) s.skillHits += 1;
+      s.skillIndex += 1;
+      if(s.skillIndex < s.skillTotal) return; // more checks to go, just re-render the next one
+      // sequence complete: turn hits into a score bonus/penalty (par = half correct = neutral)
+      const bonus = (s.skillHits - s.skillTotal/2) * 1.0;
+      s.skillBonusQuali = bonus;
+      simulateQualifying();
+      s.raceStage = 'qualiResults';
+      s.skillStage = null;
+    });
   },
   runRace(){
     update(s=>{
       simulateRace();
       applyRacePayouts();
+      applyLoanRepayment();
       applyDriverDevelopmentGain();
       s.raceStage='results';
     });
+  },
+  startRaceLights(){
+    update(s=>{
+      s.raceStartIndex = 0;
+      s.raceStartResults = {};
+      s.raceStage = 'raceStartAnnounce';
+    });
+  },
+  confirmRaceStartAnnounce(){
+    update(s=>{ s.raceStage = 'raceStart'; });
+  },
+  recordRaceStart(type, reactionMs){
+    update(s=>{
+      const d = myDrivers()[s.raceStartIndex];
+      if(d){ s.raceStartResults[d.id] = {type, reactionMs}; }
+      s.raceStartIndex += 1;
+      if(s.raceStartIndex < 2){ s.raceStage = 'raceStartAnnounce'; return; } // announce the next driver
+      simulateRace();
+      applyRacePayouts();
+      applyLoanRepayment();
+      applyDriverDevelopmentGain();
+      s.raceStage = 'results';
+    });
+  },
+  proceedToStrategy(){
+    update(s=>{ s.raceStage='strategy'; });
   },
   nextRace(){
     update(s=>{
       advanceAiDevelopment();
       s.raceIndex += 1;
-      s.raceStage='strategy';
+      s.raceStage='quali';
+      s.qualiGrid={};
+      s.qualiResults=null;
       s.lastResults=null;
+      s.skillStage=null;
+      s.skillIndex=0;
+      s.skillHits=0;
+      s.skillBonusQuali=0;
+      s.skillBonusRace=0;
+      s.raceStartIndex=0;
+      s.raceStartResults={};
+      s.lastSponsorBonus=null;
+      s.qualiWeather = pickWeather();
+      s.raceWeather = pickWeather();
+      s.qualiTire = 'medium';
+      s.raceTires = {};
+      s.drivers.forEach(id=>{ s.raceTires[id] = 'medium'; });
       refreshSponsorOffers();
       if(s.raceIndex >= CALENDAR.length){
         s.phase='seasonend';
@@ -681,7 +1229,17 @@ const Actions = {
       s.standingsDrivers = {};
       s.drivers.forEach(id=>{ s.strategies[id]='balanced'; s.standingsDrivers[id]=0; });
       s.standingsConstructors['YOU']=0;
+      if(!s.drivers.includes(s.leadDriverId)){ s.leadDriverId = null; }
+      s.rivalry = {headToHead:{}};
+      s.drivers.forEach(id=>{ s.rivalry.headToHead[id]=0; });
+      s.qualiWeather = pickWeather();
+      s.raceWeather = pickWeather();
+      s.qualiTire = 'medium';
+      s.raceTires = {};
+      s.drivers.forEach(id=>{ s.raceTires[id] = 'medium'; });
       s.previousDrivers=[];
+      s.seasonDriverIds = [...s.drivers];
+      s.seasonRosterEvents = [];
       ensureAiTeams();
       refreshSponsorOffers();
       s.phase='season';
@@ -702,11 +1260,38 @@ const Actions = {
 };
 
 /* =============================== VIEWS =============================== */
+function weatherBadge(weatherId){
+  const w = WEATHERS.find(x=>x.id===weatherId) || WEATHERS[0];
+  return `<span class="pill on">${w.icon} ${w.label}</span>`;
+}
+const TIRE_COLORS = {
+  soft:{bg:'#E10600',fg:'#fff'},
+  medium:{bg:'#FFD400',fg:'#1a1a00'},
+  hard:{bg:'#F2F2F2',fg:'#1a1a1a'},
+  intermediate:{bg:'#2ECC71',fg:'#04241c'},
+  wet:{bg:'#2E6EE1',fg:'#fff'},
+};
+function tireSelectorHtml(currentTireId, weatherId, onClickJs){
+  const weather = WEATHERS.find(w=>w.id===weatherId) || WEATHERS[0];
+  const chips = TIRES.map(t=>{
+    const match = t.category === weather.tireCategory;
+    const active = currentTireId===t.id;
+    const c = TIRE_COLORS[t.id];
+    return `<div class="tire-chip ${active?'active':''}" style="background:${c.bg};color:${c.fg};" onclick="${onClickJs(t.id)}">
+      ${t.short}<span class="badge ${match?'ok':'warn'}">${match?'✓':'!'}</span>
+    </div>`;
+  }).join('');
+  const current = TIRES.find(t=>t.id===currentTireId) || TIRES[1];
+  const currentMatch = current.category === weather.tireCategory;
+  return `<div class="tire-row">${chips}</div>
+    <div class="tire-caption" style="color:${currentMatch?'var(--green)':'var(--red)'};">${current.label} ${currentMatch?'· consigliate':'· rischiose con questo meteo'}</div>`;
+}
+
 function svgIcon(name){
   const icons = {
     home:'<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>',
     garage:'<path d="M4 21V9l8-5 8 5v12"/><path d="M4 21h16"/><circle cx="9" cy="17" r="1.5"/><circle cx="15" cy="17" r="1.5"/>',
-    sponsor:'<path d="M12 2l2.5 5 5.5.8-4 3.9.9 5.5L12 14.8 7.1 17.2l.9-5.5-4-3.9 5.5-.8z"/>',
+    finance:'<circle cx="12" cy="12" r="9"/><path d="M9 15V9l3 6 3-6v6"/>',
     race:'<path d="M4 4v16"/><path d="M4 5h9l-1.5 3L13 11H4"/>',
     standings:'<path d="M4 20V10"/><path d="M12 20V4"/><path d="M20 20v-7"/>',
   };
@@ -715,8 +1300,12 @@ function svgIcon(name){
 
 function viewTopbar(){
   if(state.phase==='setup') return '';
-  const name = state.team.name || 'La tua Scuderia';
+  const name = displayTeamName();
   const color = state.team.color;
+  const showPos = (state.phase==='season'||state.phase==='seasonend'||state.phase==='redraft');
+  const pos = showPos ? myConstructorPosition() : null;
+  const totalTeams = showPos ? (state.aiTeams.length + 1) : null;
+  const tier = pos==null ? '' : (pos<=3 ? 'tier-gold' : (pos<=6 ? 'tier-mid' : 'tier-low'));
   return `
   <div class="topbar">
     <div class="brand">
@@ -726,9 +1315,16 @@ function viewTopbar(){
         <div class="sub">SEASON ${state.season} · ${state.phase==='season' ? `RD ${Math.min(state.raceIndex+1,CALENDAR.length)}/${CALENDAR.length}` : '—'}</div>
       </div>
     </div>
-    <div style="text-align:right">
-      <div class="budget-label">Budget</div>
-      <div class="budget">${fmtM(state.budget)}</div>
+    <div class="stat-chips">
+      ${showPos ? `
+      <div class="stat-chip pos-chip ${tier}">
+        <div class="chip-label">Costruttori</div>
+        <div class="chip-value">${pos<=3?'🏆':'🏁'} P${pos}<span style="color:var(--muted2);font-weight:400;font-size:10px;">/${totalTeams}</span></div>
+      </div>` : ''}
+      <div class="stat-chip budget-chip">
+        <div class="chip-label">Budget</div>
+        <div class="chip-value">${fmtM(state.budget)}</div>
+      </div>
     </div>
   </div>`;
 }
@@ -738,14 +1334,14 @@ function viewBottomNav(){
   const tabs = [
     ['home','Box','home'],
     ['garage','Garage','garage'],
-    ['sponsor','Sponsor','sponsor'],
+    ['finance','Finanza','finance'],
     ['race','Gara','race'],
     ['standings','Classifiche','standings'],
   ];
   const sponsorSlotFree = (state.activeSponsors||[]).length < MAX_ACTIVE_SPONSORS;
   return `<div class="bottomnav">${tabs.map(([id,label,icon])=>`
-    <button class="navbtn ${state.activeTab===id?'active':''}" onclick="Actions.setTab('${id}')">
-      <span class="icon-wrap">${svgIcon(icon)}${(id==='sponsor' && sponsorSlotFree) ? '<span class="nav-badge"></span>' : ''}</span><span>${label}</span>
+    <button class="navbtn ${(state.activeTab===id||state.activeTab.startsWith(id+'-'))?'active':''}" onclick="Actions.setTab('${id}')">
+      <span class="icon-wrap">${svgIcon(icon)}${(id==='finance' && sponsorSlotFree) ? '<span class="nav-badge"></span>' : ''}</span><span>${label}</span>
     </button>`).join('')}</div>`;
 }
 
@@ -782,6 +1378,11 @@ function viewRedraft(){
   const newlySelected = state.drivers.filter(id=>!state.previousDrivers.includes(id));
   const costOfNew = newlySelected.reduce((sum,id)=>sum+driverById(id).cost,0);
   const remaining = state.budget - costOfNew;
+  // Include any reserve/substitute drivers signed mid-season (they live in
+  // state.customDrivers, not the static DRIVERS pool) so a driver you swapped
+  // in during the season still shows up here and can be reconfirmed or kept.
+  const rosterPool = [...DRIVERS, ...Object.values(state.customDrivers||{})]
+    .sort((a,b)=>b.rating-a.rating);
   return `
   <div class="view">
     <div class="eyebrow">MERCATO PILOTI · STAGIONE ${state.season}</div>
@@ -789,7 +1390,7 @@ function viewRedraft(){
     <p style="color:var(--muted);font-size:12px;margin-bottom:10px;">I piloti già sotto contratto restano gratis se li riconfermi. Un nuovo ingaggio si paga subito. Budget rimanente: <b style="color:${remaining>=0?'var(--green)':'var(--red)'}">${fmtM(remaining)}</b></p>
     <div class="notice" style="margin-bottom:14px;">Rimuovi un pilota toccandolo di nuovo, poi scegline un altro dalla lista. Serve sempre esattamente una coppia di piloti per partire.</div>
     <div class="card" style="max-height:none;">
-      ${DRIVERS.map(d=>{
+      ${rosterPool.map(d=>{
         const sel = state.drivers.includes(d.id);
         const isKept = sel && state.previousDrivers.includes(d.id);
         const affordable = sel || (d.cost <= remaining);
@@ -847,7 +1448,7 @@ function viewHome(){
       <div class="grid2">
         ${['aero','power','chassis','reliability'].map(k=>`
           <div>
-            <div class="statrow"><div class="head"><span class="name">${STAT_META[k].label.split(' ')[0]}</span><span class="lvl">LV ${state.car[k]}</span></div>
+            <div class="statrow"><div class="head"><span class="name">${STAT_META[k].label.split(' ')[0]}</span><span class="lvl">LV ${state.car[k].toFixed(2)}</span></div>
             <div class="bar"><div class="bar-fill ${k}" style="width:${Math.min(100,state.car[k]*8)}%"></div></div></div>
           </div>`).join('')}
       </div>
@@ -862,16 +1463,73 @@ function viewHome(){
         <button class="btn btn-primary btn-sm" onclick="Actions.setTab('race')">Vai al weekend →</button>
       </div>
     </div>
-    <div class="card">
-      <div class="card-title">I tuoi piloti</div>
-      ${ds.map(d=>`<div class="driver-card"><div class="driver-avatar">${d.nat}</div><div class="driver-info"><div class="driver-name">${d.name}</div><div class="driver-meta">${state.standingsDrivers[d.id]||0} PUNTI STAGIONE</div></div></div>`).join('')}
-    </div>
+    ${(()=>{
+      const [a,b] = state.drivers;
+      if(!a || !b) return '';
+      const da = driverById(a), db = driverById(b);
+      if(!da || !db) return '';
+      const h2hA = state.rivalry.headToHead[a]||0;
+      const h2hB = state.rivalry.headToHead[b]||0;
+      const totalH2H = h2hA+h2hB;
+      const ptsA = state.standingsDrivers[a]||0;
+      const ptsB = state.standingsDrivers[b]||0;
+      const gap = Math.abs(ptsA-ptsB);
+      const pctA = totalH2H>0 ? (h2hA/totalH2H*100) : 50;
+      const pctB = 100-pctA;
+      let tension = '', tensionClass = 'calm';
+      if(state.leadDriverId){
+        const leaderIsA = state.leadDriverId===a;
+        const leaderPts = leaderIsA?ptsA:ptsB;
+        const otherPts = leaderIsA?ptsB:ptsA;
+        const leaderH2H = leaderIsA?h2hA:h2hB;
+        const otherH2H = leaderIsA?h2hB:h2hA;
+        if(otherPts>leaderPts || otherH2H>leaderH2H){
+          const otherName = leaderIsA ? db.name : da.name;
+          tension = `🔥 Tensione in crescita: <b>${otherName}</b> sta mettendo in discussione la gerarchia del team.`;
+          tensionClass = 'hot';
+        } else {
+          tension = `👑 La gerarchia del team regge: la prima guida resta avanti sia in classifica che negli scontri diretti.`;
+          tensionClass = 'calm';
+        }
+      } else {
+        tension = `📋 Non hai ancora scelto una Prima Guida: tocca uno dei due piloti qui sotto per assegnarle un piccolo bonus di prestazione dal muretto box.${(gap<=15 && totalH2H>=2)?' ⚡ Lotta interna già serrata tra i due!':''}`;
+        tensionClass = 'hype';
+      }
+      return `
+      <div class="card">
+        <div class="card-title">Gerarchia & Rivalità</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">Tocca un pilota per renderlo la tua prima guida (bonus di prestazione dal muretto box). Tocca di nuovo per rimuovere la scelta.</div>
+        <div class="rivalry-vs">
+          ${[da,db].map((d,i)=>{
+            const isLeader = state.leadDriverId===d.id;
+            const h2h = state.rivalry.headToHead[d.id]||0;
+            const pts = state.standingsDrivers[d.id]||0;
+            return `<div class="rivalry-driver ${isLeader?'leader':''}" onclick="Actions.setLeadDriver('${d.id}')">
+              <div class="crown-slot">${isLeader?'👑':''}</div>
+              <div class="rv-avatar">${d.nat}</div>
+              <div class="rv-name">${d.name}</div>
+              <div class="rv-pts">${pts} PT</div>
+              <div class="rv-h2h">${h2h} H2H VINTI</div>
+              <div class="rv-tap">${isLeader?'Prima Guida':'Tocca per eleggere'}</div>
+            </div>`;
+          }).join(`<div class="rivalry-vs-badge">VS</div>`)}
+        </div>
+        <div class="dominance-track">
+          <div class="dominance-seg" style="width:${pctA}%;background:${da.id===state.leadDriverId?'var(--amber)':'#5B8DEF'};"></div>
+          <div class="dominance-seg" style="width:${pctB}%;background:${db.id===state.leadDriverId?'var(--amber)':'var(--red)'};"></div>
+        </div>
+        <div class="dominance-caption"><span>${h2hA} VINTI</span><span>TESTA A TESTA</span><span>${h2hB} VINTI</span></div>
+        ${tension?`<div class="tension-banner ${tensionClass}">${tension}</div>`:''}
+      </div>`;
+    })()}
+    ${state.drivers.length<2?`<div class="tension-banner hot" style="margin-top:0;margin-bottom:14px;">⚠️ Hai un posto vacante in squadra! Vai al Mercato Piloti per ingaggiare un sostituto prima del prossimo weekend di gara.</div>`:''}
     <div class="card">
       <div class="card-title">Sponsor Attivi <span class="pill ${state.activeSponsors.length?'on':''}">${state.activeSponsors.length}/${MAX_ACTIVE_SPONSORS}</span></div>
-      ${state.activeSponsors.length===0?`<div style="color:var(--muted);font-size:12px;">Nessun contratto attivo. Vai in sezione Sponsor.</div>`:
+      ${state.activeSponsors.length===0?`<div style="color:var(--muted);font-size:12px;">Nessun contratto attivo. Vai in sezione Finanza.</div>`:
         state.activeSponsors.map(s=>`<div style="display:flex;justify-content:space-between;font-size:12px;padding:6px 0;"><span>${s.name}</span><span class="mono" style="color:var(--green)">${fmtM(s.value)}/gara · ${s.remaining} rimanenti</span></div>`).join('')}
     </div>
-    <button class="btn btn-outline" onclick="Actions.setTab('career')">📊 Storico Carriera</button>
+    <button class="btn btn-outline" onclick="Actions.setTab('midmarket')">🔄 Mercato Piloti</button>
+    <button class="btn btn-outline" style="margin-top:10px;" onclick="Actions.setTab('career')">📊 Storico Carriera</button>
   </div>`;
 }
 
@@ -891,6 +1549,15 @@ function viewGarage(){
           <div class="power-bar-track"><div class="power-bar-fill" style="width:${Math.min(100,r.power)}%"></div></div>
           <div class="pval">${r.power}</div>
         </div>`).join('')}
+      ${(state.lastDevelopmentEvents && state.lastDevelopmentEvents.length) ? `
+        <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--line);">
+          <div style="font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Sviluppi dell'ultima gara</div>
+          ${state.lastDevelopmentEvents.map(e=>`
+            <div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;">
+              <span>${e.type==='breakthrough'?'🚀':'📉'} ${e.team}</span>
+              <span class="mono" style="color:${e.type==='breakthrough'?'var(--green)':'var(--red)'};">${e.delta>=0?'+':''}${e.delta}</span>
+            </div>`).join('')}
+        </div>` : ''}
     </div>
     ${(()=>{
       const gain = driverDevelopmentGain();
@@ -921,39 +1588,43 @@ function viewGarage(){
   </div>`;
 }
 
-function viewSponsors(){
-  if(!state.sponsorOffers || state.sponsorOffers.length===0) refreshSponsorOffers();
-  return `
-  <div class="view">
-    <div class="eyebrow">SPONSOR</div>
-    <h2 style="font-size:20px;margin:6px 0 14px;">Contratti Sponsor</h2>
-    <div class="notice">Il valore delle offerte dipende dal rendimento del team: più vinci, più gli sponsor pagano. Massimo ${MAX_ACTIVE_SPONSORS} contratti attivi contemporaneamente, scegli tra fino a ${MAX_SPONSOR_OFFERS} offerte disponibili.</div>
-    <div class="card">
-      <div class="card-title">Contratti Attivi (${state.activeSponsors.length}/${MAX_ACTIVE_SPONSORS})</div>
-      ${state.activeSponsors.length===0?'<div class="empty-state">Nessun contratto firmato.</div>':
-        state.activeSponsors.map(s=>`
-        <div class="sponsor-card">
-          <div class="sponsor-top"><span class="sponsor-name">${s.name}</span><span class="sponsor-value">${fmtM(s.value)}/gara</span></div>
-          <div class="progress-track"><div class="progress-fill" style="width:${((s.duration-s.remaining)/s.duration*100)}%"></div></div>
-          <div style="font-size:10px;color:var(--muted);margin-top:5px;">${s.remaining} gare rimanenti al rinnovo</div>
-        </div>`).join('')}
-    </div>
-    <div class="card-title" style="padding:0 4px;">Offerte Disponibili <button class="btn btn-ghost btn-sm" style="width:auto;float:right;" onclick="Actions.refreshOffers()">🔄 Aggiorna</button></div>
-    ${state.sponsorOffers.map(o=>`
-      <div class="sponsor-card">
-        <div class="sponsor-top">
-          <div><div class="sponsor-name">${o.name}</div><div style="font-size:10px;color:var(--muted);">${o.industry} · ${o.duration} gare</div></div>
-          <span class="sponsor-value">${fmtM(o.value)}/gara</span>
-        </div>
-        <button class="btn btn-primary btn-sm" style="width:100%;margin-top:10px;" ${state.activeSponsors.length>=MAX_ACTIVE_SPONSORS?'disabled':''} onclick="Actions.signSponsor('${o.id}')">Firma Contratto</button>
-      </div>`).join('')}
-  </div>`;
-}
-
 function viewRace(){
+  if(state.drivers.length<2){
+    return `
+    <div class="view">
+      <div style="text-align:center;margin:40px 0 20px;">
+        <div class="eyebrow">ROSA INCOMPLETA</div>
+        <h1 style="font-size:24px;margin-top:8px;">⚠️ Hai un posto vacante</h1>
+        <p style="color:var(--muted);font-size:13px;margin-top:10px;">Ingaggia un sostituto dal Mercato Piloti prima di scendere in pista.</p>
+      </div>
+      <button class="btn btn-primary" onclick="Actions.setTab('midmarket')">🔄 Vai al Mercato Piloti</button>
+    </div>`;
+  }
   if(state.raceStage==='results' && state.lastResults){
     return viewRaceResults();
   }
+  if(state.raceStage==='qualiResults' && state.qualiResults){
+    return viewQualiResults();
+  }
+  if(state.raceStage==='quali'){
+    return viewQualiIntro();
+  }
+  if(state.raceStage==='qualiPrep'){
+    return viewQualiPrep();
+  }
+  if(state.raceStage==='qualiSkill' || state.raceStage==='raceSkill'){
+    return viewSkillCheck();
+  }
+  if(state.raceStage==='raceStartPrep'){
+    return viewRaceStartPrep();
+  }
+  if(state.raceStage==='raceStartAnnounce'){
+    return viewRaceStartAnnounce();
+  }
+  if(state.raceStage==='raceStart'){
+    return viewRaceStart();
+  }
+  if(!state.raceWeather) state.raceWeather = pickWeather();
   const track = CALENDAR[state.raceIndex];
   const ds = myDrivers();
   return `
@@ -962,18 +1633,172 @@ function viewRace(){
       <div class="round-num">ROUND ${state.raceIndex+1} / ${CALENDAR.length}</div>
       <div class="track-name">${track.name}</div>
       <div style="color:var(--muted);font-size:12px;margin-top:2px;">${track.loc} · ${track.date}</div>
+      <div style="margin-top:8px;">${weatherBadge(state.raceWeather)}</div>
     </div>
     <div class="card-title" style="padding:0 4px;">Strategia di Gara</div>
-    ${ds.map(d=>`
+    ${!state.leadDriverId ? `<div class="tension-banner hype" style="margin-bottom:14px;">📋 Non hai ancora scelto una Prima Guida per questa gara. <span style="text-decoration:underline;cursor:pointer;" onclick="Actions.setTab('home')">Assegnala dal Box</span> per un piccolo bonus di prestazione.</div>` : ''}
+    ${ds.map(d=>{
+      const grid = state.qualiGrid[d.id];
+      return `
       <div class="card">
-        <div class="card-title">${d.nat} ${d.name}</div>
+        <div class="card-title">${d.nat} ${d.name} ${state.leadDriverId===d.id?'<span class="pill warn">👑 Prima Guida</span>':''} ${grid?`<span class="pill on">Griglia P${grid}</span>`:''}</div>
+        <div style="font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.5px;margin:6px 0 4px;">Ritmo di Gara</div>
         ${Object.entries(STRATEGIES).map(([key,s])=>`
           <div class="strategy-opt ${state.strategies[d.id]===key?'active':''}" onclick="Actions.setStrategy('${d.id}','${key}')">
             <div><div class="lbl">${s.label}</div><div class="desc">${s.desc}</div></div>
             ${state.strategies[d.id]===key?'<span style="color:var(--green);font-weight:700;">✓</span>':''}
           </div>`).join('')}
-      </div>`).join('')}
-    <button class="btn btn-primary" onclick="Actions.runRace()">🏁 Simula Gara</button>
+        <div style="font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.5px;margin:12px 0 4px;">Gomme (${weatherBadge(state.raceWeather)})</div>
+        ${tireSelectorHtml(state.raceTires[d.id]||'medium', state.raceWeather, (id)=>`Actions.setRaceTire('${d.id}','${id}')`)}
+      </div>`;
+    }).join('')}
+    <button class="btn btn-primary" onclick="Actions.goToRaceStartPrep()">🚦 Vai alla Partenza</button>
+  </div>`;
+}
+
+function viewRaceStartPrep(){
+  const ds = myDrivers();
+  return `
+  <div class="view">
+    <div style="text-align:center;margin:26px 0 18px;">
+      <div class="eyebrow">PREPARATI</div>
+      <h1 style="font-size:26px;margin-top:8px;">🚦 Prova di Partenza</h1>
+    </div>
+    <div class="card">
+      <div class="card-title">Come funziona</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.8;">
+        • Vedrai i 5 semafori F1 accendersi uno alla volta.<br>
+        • Restano accesi per un tempo casuale, poi si spengono tutti insieme.<br>
+        • Tocca "VIA!" appena si spengono: troppo presto è partenza anticipata (penalità), troppo tardi ti fa perdere qualche posizione.<br>
+        • Si ripete per entrambi i tuoi piloti, uno alla volta.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Ordine di partenza</div>
+      ${ds.map((d,i)=>`<div class="driver-card"><div class="driver-avatar">${d.nat}</div><div class="driver-info"><div class="driver-name">${i+1}. ${d.name}</div></div></div>`).join('')}
+    </div>
+    <button class="btn btn-primary" onclick="Actions.startRaceLights()">Sono Pronto — Via! →</button>
+  </div>`;
+}
+
+function viewQualiIntro(){
+  const track = CALENDAR[state.raceIndex];
+  return `
+  <div class="view">
+    <div class="track-banner">
+      <div class="round-num">ROUND ${state.raceIndex+1} / ${CALENDAR.length}</div>
+      <div class="track-name">${track.name}</div>
+      <div style="color:var(--muted);font-size:12px;margin-top:2px;">${track.loc} · ${track.date}</div>
+    </div>
+    <div class="notice">Prima della gara si disputano le qualifiche: un giro secco a bassa varianza, senza strategia né ritiri, per stabilire la griglia di partenza. Partire più avanti dà un vantaggio reale in gara, ma non decisivo.</div>
+    <button class="btn btn-primary" onclick="Actions.goToQualiPrep()">⏱️ Simula Qualifica</button>
+  </div>`;
+}
+
+function viewQualiPrep(){
+  if(!state.qualiWeather) state.qualiWeather = pickWeather();
+  return `
+  <div class="view">
+    <div style="text-align:center;margin:26px 0 18px;">
+      <div class="eyebrow">PREPARATI</div>
+      <h1 style="font-size:26px;margin-top:8px;">🛑 Prova di Frenata</h1>
+      <div style="margin-top:8px;">${weatherBadge(state.qualiWeather)}</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Come funziona</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.8;">
+        • L'auto si avvicina alla curva in un'unica direzione, senza tornare indietro.<br>
+        • Tocca "FRENA!" quando entra nella zona verde.<br>
+        • Troppo presto = frenata anticipata. Troppo tardi = frenata tardiva.<br>
+        • Sono 5 curve di fila: più ne prendi bene, più guadagni sulla griglia di partenza.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Strategia Qualifica: Scelta Gomme</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">Condizioni: ${weatherBadge(state.qualiWeather)}. Scegli le gomme giuste per la qualifica: usare la mescola sbagliata per le condizioni costa caro in tempo sul giro.</div>
+      ${tireSelectorHtml(state.qualiTire, state.qualiWeather, (id)=>`Actions.setQualiTire('${id}')`)}
+    </div>
+    <button class="btn btn-primary" onclick="Actions.startSkillChecks('quali')">Sono Pronto — Inizia! →</button>
+  </div>`;
+}
+
+function viewSkillCheck(){
+  const total = state.skillTotal;
+  const idx = state.skillIndex;
+  const showReady = (idx===0 && !state.qualiFirstLaunched);
+  return `
+  <div class="view view-center">
+    <div class="eyebrow" style="text-align:center;">QUALIFICA · PUNTO DI FRENATA</div>
+    <h2 style="font-size:20px;margin:6px 0 4px;text-align:center;">Curva ${idx+1} / ${total}</h2>
+    <p style="color:var(--muted);font-size:12px;margin-bottom:14px;text-align:center;">${showReady ? 'L\'auto è ferma ai box, pronta a partire. Premi VIA! per lanciarti verso la prima curva.' : `L'auto si avvicina alla curva: premi "FRENA!" quando entra nella zona verde. Corrette finora: <b style="color:var(--green)">${state.skillHits}</b> / ${idx}`}</p>
+    <div class="card" style="text-align:center;">
+      <div id="brakeTrack" class="brake-track">
+        <div id="brakeZone" class="brake-zone" style="${showReady?'opacity:0;':''}"></div>
+        <div id="brakeCar" class="brake-car" style="left:0%;">🏎️</div>
+        <div class="brake-corner">🚩</div>
+      </div>
+      <div id="skillFeedback" style="min-height:22px;font-weight:700;font-family:var(--font-display);letter-spacing:0.5px;margin-bottom:14px;"></div>
+      ${showReady
+        ? `<button class="btn btn-primary" onclick="Actions.launchFirstSkillCheck()">🏎️ VIA!</button>`
+        : `<button class="btn btn-primary" onclick="handleSkillCheckTap()">🛑 FRENA!</button>`}
+    </div>
+  </div>`;
+}
+
+function viewRaceStartAnnounce(){
+  const idx = state.raceStartIndex;
+  const d = myDrivers()[idx];
+  if(!d){ return ''; }
+  return `
+  <div class="view view-center">
+    <div style="text-align:center;">
+      <div class="eyebrow">PILOTA ${idx+1} DI 2</div>
+      <div style="font-size:52px;margin:18px 0 10px;">${d.nat}</div>
+      <h1 style="font-size:26px;">${d.name}</h1>
+      <p style="color:var(--muted);font-size:12px;margin-top:8px;">è in griglia, pronto a partire.</p>
+      <button class="btn btn-primary" style="margin-top:26px;" onclick="Actions.confirmRaceStartAnnounce()">🎙️ Ai semafori →</button>
+    </div>
+  </div>`;
+}
+
+function viewRaceStart(){
+  const idx = state.raceStartIndex;
+  const d = myDrivers()[idx];
+  if(!d){ return ''; }
+  return `
+  <div class="view view-center">
+    <div class="eyebrow" style="text-align:center;">PARTENZA · PROVA DI REAZIONE</div>
+    <h2 style="font-size:20px;margin:6px 0 4px;text-align:center;">Pilota ${idx+1} / 2: ${d.nat} ${d.name}</h2>
+    <p style="color:var(--muted);font-size:12px;margin-bottom:14px;text-align:center;">Tocca "VIA!" appena i semafori si spengono. Troppo presto = partenza anticipata (penalità). Troppo tardi = perdi qualche posizione.</p>
+    <div class="card" style="text-align:center;">
+      <div class="start-lights">
+        ${[1,2,3,4,5].map(n=>`<div id="light${n}" class="start-light"></div>`).join('')}
+      </div>
+      <div id="raceStartFeedback" style="min-height:22px;font-weight:700;font-family:var(--font-display);letter-spacing:0.5px;margin-bottom:14px;"></div>
+      <button class="btn btn-primary" onclick="handleRaceStartTap()">🖐️ VIA!</button>
+    </div>
+  </div>`;
+}
+
+function viewQualiResults(){
+  const track = CALENDAR[state.raceIndex];
+  return `
+  <div class="view">
+    <div class="track-banner">
+      <div class="round-num">GRIGLIA DI PARTENZA · ROUND ${state.raceIndex+1}</div>
+      <div class="track-name">${track.name}</div>
+      <div style="margin-top:6px;">${weatherBadge(state.qualiWeather)}</div>
+    </div>
+    <div class="card">
+      ${state.qualiResults.map(r=>`
+        <div class="res-row ${r.team==='YOU'?'you':''}">
+          <div class="pos">${r.pos}</div>
+          <div><div>${r.name}</div><div class="team">${r.team==='YOU'?displayTeamName():r.team}</div></div>
+          <div></div>
+          <div></div>
+        </div>`).join('')}
+    </div>
+    <button class="btn btn-primary" onclick="Actions.proceedToStrategy()">Vai alla Strategia di Gara →</button>
   </div>`;
 }
 
@@ -985,22 +1810,37 @@ function viewRaceResults(){
     <div class="track-banner">
       <div class="round-num">RISULTATI · ROUND ${state.raceIndex+1}</div>
       <div class="track-name">${track.name}</div>
+      <div style="margin-top:6px;">${weatherBadge(state.raceWeather)}</div>
     </div>
     <div class="card">
-      ${state.lastResults.map(r=>`
+      ${state.lastResults.map(r=>{
+        const delta = (r.startPos!=null && !r.dnf) ? (r.startPos - r.pos) : null;
+        const deltaLabel = delta==null ? '' : (delta>0?`<span style="color:var(--green);">▲${delta}</span>`:(delta<0?`<span style="color:var(--red);">▼${Math.abs(delta)}</span>`:`<span style="color:var(--muted2);">=</span>`));
+        const rl = r.startReaction;
+        const startLabel = !rl ? '' :
+          (rl.type==='jumpstart' ? ` · <span style="color:var(--red);">🚫 Partenza anticipata</span>` :
+           rl.type==='perfect' ? ` · <span style="color:var(--green);">⚡ Partenza perfetta</span>` :
+           rl.type==='slow' || rl.type==='verySlow' ? ` · <span style="color:var(--amber);">🐢 Partenza lenta</span>` : '');
+        return `
         <div class="res-row ${r.team==='YOU'?'you':''}">
           <div class="pos">${r.dnf?'—':r.pos}</div>
-          <div><div>${r.name}</div><div class="team">${r.team==='YOU'?(state.team.name||'IL TUO TEAM'):r.team}</div></div>
+          <div><div>${r.name}</div><div class="team">${r.team==='YOU'?displayTeamName():r.team}${r.startPos?` · Partito P${r.startPos} ${deltaLabel}`:''}${startLabel}</div></div>
           <div class="dnf">${r.dnf?'DNF':''}</div>
           <div class="pts">${r.pts?('+'+r.pts):'0'}</div>
-        </div>`).join('')}
+        </div>`;
+      }).join('')}
     </div>
+    ${state.lastSponsorBonus ? `
+    <div class="card" style="text-align:center;background:linear-gradient(135deg,rgba(255,182,39,0.1),rgba(0,217,163,0.06));border-color:rgba(255,182,39,0.35);">
+      <div style="font-size:13px;font-weight:700;margin-bottom:4px;">${state.lastSponsorBonus.label}${state.lastSponsorBonus.hasPole?' · 🎯 Pole Position':''}</div>
+      <div style="font-family:var(--font-mono);color:var(--amber);font-weight:700;font-size:18px;">+${fmtM(state.lastSponsorBonus.amount)} bonus sponsor</div>
+    </div>` : ''}
     <button class="btn btn-primary" onclick="Actions.nextRace()">${isLast?'Vai al Fine Stagione →':'Prossima Gara →'}</button>
   </div>`;
 }
 
 function driverTeamLabel(key){
-  if(state.drivers.includes(key)) return state.team.name || 'La tua Scuderia';
+  if(state.drivers.includes(key)) return displayTeamName();
   for(const t of state.aiTeams){
     if(t.drivers.some(d=>d.name===key)) return t.name;
   }
@@ -1027,8 +1867,147 @@ function viewStandings(){
           const teamLabel = driverTeamLabel(id);
           return `<div class="standing-row ${isMine?'you':''}"><div class="p">${i+1}</div><div><div>${name}</div>${teamLabel?`<div style="font-size:9px;color:var(--muted2);">${teamLabel}</div>`:''}</div><div class="pt">${pts}</div></div>`;
         }).join('')
-        : constructorsRanked.map(([name,pts],i)=>`<div class="standing-row ${name==='YOU'?'you':''}"><div class="p">${i+1}</div><div>${name==='YOU'?(state.team.name||'Il tuo team'):name}</div><div class="pt">${pts}</div></div>`).join('')}
+        : constructorsRanked.map(([name,pts],i)=>`<div class="standing-row ${name==='YOU'?'you':''}"><div class="p">${i+1}</div><div>${name==='YOU'?displayTeamName():name}</div><div class="pt">${pts}</div></div>`).join('')}
     </div>
+  </div>`;
+}
+
+function viewMidSeasonMarket(){
+  const pool = midSeasonMarketPool();
+  const ds = state.drivers.map(id=>({id, ...driverById(id)}));
+  const seatsOpen = 2 - state.drivers.length;
+  return `
+  <div class="view">
+    <div class="eyebrow">MERCATO PILOTI</div>
+    <h2 style="font-size:20px;margin:6px 0 4px;">Trattative a Stagione in Corso</h2>
+    <div class="notice">Le scuderie reali hanno già chiuso la formazione per questa stagione: qui trovi solo piloti svincolati e le riserve/terze guide confermate per il 2026, disponibili perché il titolare della loro scuderia non è stato ingaggiato da nessuno.</div>
+    ${state.formError?`<div class="field-error" style="margin-bottom:10px;">⚠ ${state.formError}</div>`:''}
+    <div class="card">
+      <div class="card-title">La Tua Rosa (${state.drivers.length}/2)</div>
+      ${ds.map(d=>{
+        const canRescind = canAffordReplacementFor(d.id);
+        return `
+        <div class="driver-card">
+          <div class="driver-avatar">${d.nat}</div>
+          <div class="driver-info">
+            <div class="driver-name">${d.name}</div>
+            <div class="driver-meta">RATING ${d.rating} · ${state.standingsDrivers[d.id]||0} PT STAGIONE</div>
+          </div>
+          <button class="btn btn-outline btn-sm" style="color:${canRescind?'var(--red)':'var(--muted2)'};border-color:${canRescind?'var(--red)':'var(--line)'};" ${canRescind?'':'disabled'} onclick="Actions.requestRescind('${d.id}')">Rescindi</button>
+        </div>`;
+      }).join('')}
+      ${seatsOpen>0?`<div class="field-error" style="margin-top:6px;">⚠ ${seatsOpen} posto${seatsOpen>1?'i':''} vacante${seatsOpen>1?'i':''}: ingaggia un sostituto qui sotto prima del prossimo weekend.</div>`:''}
+    </div>
+    <div class="card-title" style="padding:0 4px;">Disponibili sul Mercato (${pool.length})</div>
+    ${pool.length===0?'<div class="empty-state">Nessun pilota disponibile al momento.</div>':pool.map(c=>{
+      const affordable = seatsOpen>0 && c.cost<=state.budget;
+      return `<div class="driver-card" style="opacity:${seatsOpen>0?1:0.5};">
+        <div class="driver-avatar">${c.nat}</div>
+        <div class="driver-info">
+          <div class="driver-name">${c.name}</div>
+          <div class="driver-meta">RATING ${c.rating} · ${c.tag}</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="driver-cost">${fmtM(c.cost)}</div>
+          <button class="btn btn-primary btn-sm" style="margin-top:6px;" ${affordable?'':'disabled'} onclick="Actions.signMarketDriver('${c.key.replace(/'/g,"\\'")}')">Ingaggia</button>
+        </div>
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+
+function viewFinance(){
+  if(!state.sponsorOffers || state.sponsorOffers.length===0) refreshSponsorOffers();
+  if(!state.investorOffers || state.investorOffers.length===0){ if(!state.titleInvestor) refreshInvestorOffers(); }
+  const sub = state.activeTab==='finance-loan' ? 'loan' : (state.activeTab==='finance-investor' ? 'investor' : 'sponsor');
+  return `
+  <div class="view">
+    <div class="eyebrow">FINANZA</div>
+    <h2 style="font-size:20px;margin:6px 0 14px;">Sponsor, Prestiti & Investitori</h2>
+    <div class="tabs">
+      <button class="tab ${sub==='sponsor'?'active':''}" onclick="Actions.setTab('finance')">🤝 Sponsor</button>
+      <button class="tab ${sub==='loan'?'active':''}" onclick="Actions.setTab('finance-loan')">🏦 Prestito</button>
+      <button class="tab ${sub==='investor'?'active':''}" onclick="Actions.setTab('finance-investor')">🏷️ Investitori</button>
+    </div>
+
+    ${sub==='sponsor' ? `
+      <div class="notice">I contratti durano ${SPONSOR_HALF_SEASON} gare, metà campionato. Il valore delle offerte dipende dal rendimento del team: più vinci, più gli sponsor pagano. Massimo ${MAX_ACTIVE_SPONSORS} contratti attivi contemporaneamente, scegli tra fino a ${MAX_SPONSOR_OFFERS} offerte disponibili. Quando i contratti scadono a metà stagione, le nuove offerte riflettono i risultati ottenuti fin lì.</div>
+      <div class="card">
+        <div class="card-title">Contratti Attivi (${state.activeSponsors.length}/${MAX_ACTIVE_SPONSORS})</div>
+        ${state.activeSponsors.length===0?'<div class="empty-state">Nessun contratto firmato.</div>':
+          state.activeSponsors.map(s=>`
+          <div class="sponsor-card">
+            <div class="sponsor-top"><span class="sponsor-name">${s.name}</span><span class="sponsor-value">${fmtM(s.value)}/gara</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width:${((s.duration-s.remaining)/s.duration*100)}%"></div></div>
+            <div style="font-size:10px;color:var(--muted);margin-top:5px;">${s.remaining} gare rimanenti al rinnovo</div>
+          </div>`).join('')}
+      </div>
+      <div class="card-title" style="padding:0 4px;">Offerte Disponibili <button class="btn btn-ghost btn-sm" style="width:auto;float:right;" onclick="Actions.refreshOffers()">🔄 Aggiorna</button></div>
+      ${state.sponsorOffers.map(o=>`
+        <div class="sponsor-card">
+          <div class="sponsor-top">
+            <div><div class="sponsor-name">${o.name}</div><div style="font-size:10px;color:var(--muted);">${o.industry} · ${o.duration} gare</div></div>
+            <span class="sponsor-value">${fmtM(o.value)}/gara</span>
+          </div>
+          <button class="btn btn-primary btn-sm" style="width:100%;margin-top:10px;" ${state.activeSponsors.length>=MAX_ACTIVE_SPONSORS?'disabled':''} onclick="Actions.signSponsor('${o.id}')">Firma Contratto</button>
+        </div>`).join('')}
+      <div class="card">
+        <div class="card-title">Bonus Prestazione <span class="pill on">TUTTI I CONTRATTI</span></div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">Ogni contratto attivo paga un bonus extra, in aggiunta all'importo base, in base al risultato ottenuto in quella gara:</div>
+        <div class="career-row"><div>🥇🥈 Doppietta 1-2</div><div class="mono" style="color:var(--amber);">+100%</div></div>
+        <div class="career-row"><div>🏆 Vittoria di gara</div><div class="mono" style="color:var(--amber);">+60%</div></div>
+        <div class="career-row"><div>🏅 Doppio podio</div><div class="mono" style="color:var(--amber);">+50%</div></div>
+        <div class="career-row"><div>🏁 Podio (P1-P3)</div><div class="mono" style="color:var(--amber);">+30%</div></div>
+        <div class="career-row" style="border-bottom:none;"><div>🎯 Pole Position (extra, cumulabile)</div><div class="mono" style="color:var(--amber);">+15%</div></div>
+      </div>
+    ` : ''}
+
+    ${sub==='loan' ? (state.loan ? `
+      <div class="card">
+        <div class="card-title">${LOAN_TIERS.find(t=>t.id===state.loan.tierId)?.label || 'Prestito Attivo'} <span class="pill warn">IN CORSO</span></div>
+        <div class="progress-track" style="margin-bottom:8px;"><div class="progress-fill" style="width:${Math.min(100,(1-state.loan.remainingOwed/state.loan.totalOwed)*100)}%;background:var(--red);"></div></div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.7;">
+          Residuo da restituire: <b style="color:var(--red);">${fmtM(state.loan.remainingOwed)}</b><br>
+          Rata per gara: <b style="color:var(--text);">${fmtM(state.loan.installmentAmount)}</b> · ${state.loan.remainingInstallments} gare rimanenti<br>
+          Dedotta automaticamente dal budget dopo ogni gara. Se non salda entro fine stagione, il debito residuo cresce del 10% l'anno successivo.
+        </div>
+      </div>
+    ` : `
+      <div class="notice">Prendi in prestito cash subito, da restituire automaticamente gara dopo gara con interessi. Puoi avere un solo prestito attivo alla volta.</div>
+      ${LOAN_TIERS.map(t=>{
+        const totalOwed = Math.round(t.amount*(1+t.rate)*10)/10;
+        const installment = Math.round((totalOwed/t.term)*10)/10;
+        return `<div class="sponsor-card">
+          <div class="sponsor-top">
+            <div><div class="sponsor-name">${t.label}</div><div style="font-size:10px;color:var(--muted);">Tasso ${Math.round(t.rate*100)}% · ${t.term} gare</div></div>
+            <span class="sponsor-value">${fmtM(t.amount)}</span>
+          </div>
+          <div style="font-size:10px;color:var(--muted);margin-top:8px;">Da restituire: ${fmtM(totalOwed)} totali (${fmtM(installment)}/gara)</div>
+          <button class="btn btn-primary btn-sm" style="width:100%;margin-top:10px;" onclick="Actions.requestLoan('${t.id}')">Richiedi Prestito</button>
+        </div>`;
+      }).join('')}
+    `) : ''}
+
+    ${sub==='investor' ? (state.titleInvestor ? `
+      <div class="card">
+        <div class="card-title">Accordo Attivo <span class="pill on">FINO A FINE STAGIONE</span></div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Il tuo nome ufficiale per questa stagione è:</div>
+        <div style="font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--amber);">${displayTeamName()}</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:8px;">Il nome tornerà quello originale all'inizio della prossima stagione, a meno che tu non accetti un nuovo accordo.</div>
+      </div>
+    ` : `
+      <div class="notice">Accetta un investitore esterno per un'iniezione di cash immediata: in cambio, il suo nome verrà aggiunto davanti al nome della tua scuderia per il resto della stagione, come i naming right reali della F1.</div>
+      <div class="card-title" style="padding:0 4px;">Offerte Disponibili <button class="btn btn-ghost btn-sm" style="width:auto;float:right;" onclick="Actions.refreshInvestorOffers()">🔄 Aggiorna</button></div>
+      ${state.investorOffers.map(o=>`
+        <div class="sponsor-card">
+          <div class="sponsor-top">
+            <div><div class="sponsor-name">${o.name}</div><div style="font-size:10px;color:var(--muted);">Naming rights · resto della stagione</div></div>
+            <span class="sponsor-value">${fmtM(o.amount)}</span>
+          </div>
+          <div style="font-size:10px;color:var(--muted);margin-top:6px;">Il tuo nome diventerebbe: <b>${o.name} ${state.team.name || 'La tua Scuderia'}</b></div>
+          <button class="btn btn-primary btn-sm" style="width:100%;margin-top:10px;" onclick="Actions.acceptInvestor('${o.id}')">Accetta Naming Rights</button>
+        </div>`).join('')}
+    `) : ''}
   </div>`;
 }
 
@@ -1036,7 +2015,7 @@ function viewCareer(){
   return `
   <div class="view">
     <div class="eyebrow">CARRIERA</div>
-    <h2 style="font-size:20px;margin:6px 0 14px;">${state.team.name || 'La tua Scuderia'}</h2>
+    <h2 style="font-size:20px;margin:6px 0 14px;">${displayTeamName()}</h2>
     <div class="card grid2">
       <div><div class="season-badge">STAGIONE ATTUALE</div><div class="big-num">${state.season}</div></div>
       <div><div class="season-badge">BUDGET</div><div class="big-num" style="color:var(--green);font-size:20px;">${fmtM(state.budget)}</div></div>
@@ -1046,10 +2025,15 @@ function viewCareer(){
       ${state.seasonHistory.length===0?'<div class="empty-state">Nessuna stagione completata ancora.</div>':
         [...state.seasonHistory].reverse().map(h=>{
           const champion = h.teamPos===1;
+          const swaps = h.rosterChanges||[];
           return `
-        <div class="career-row" style="${champion?'background:rgba(255,182,39,0.08);border-radius:6px;padding-left:8px;padding-right:8px;':''}">
-          <div>${champion?'<span style="margin-right:6px;">🏆</span>':''}<span class="szn">S${h.season}</span> <span style="color:${champion?'var(--amber)':'var(--muted)'}">${champion?'· Campione Costruttori':'· P'+h.teamPos+' Costruttori'}</span></div>
-          <div class="mono">${h.teamPoints} pt <span style="color:var(--amber)">+${fmtM(h.prize)}</span></div>
+        <div class="career-row" style="${champion?'background:rgba(255,182,39,0.08);border-radius:6px;padding-left:8px;padding-right:8px;':''}display:block;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>${champion?'<span style="margin-right:6px;">🏆</span>':''}<span class="szn">S${h.season}</span> <span style="color:${champion?'var(--amber)':'var(--muted)'}">${champion?'· Campione Costruttori':'· P'+h.teamPos+' Costruttori'}</span></div>
+            <div class="mono">${h.teamPoints} pt <span style="color:var(--amber)">+${fmtM(h.prize)}</span></div>
+          </div>
+          ${h.bestDriver && h.bestDriver!=='-' ? `<div style="font-size:10px;color:var(--muted2);margin-top:2px;">Miglior pilota: ${h.bestDriver} (${Math.round(h.bestDriverPts)} pt)</div>` : ''}
+          ${swaps.length ? swaps.map(e=>`<div style="font-size:10px;color:var(--muted2);margin-top:2px;">⇄ ${e.outName} → ${e.inName}</div>`).join('') : ''}
         </div>`;
         }).join('')}
     </div>
@@ -1081,7 +2065,7 @@ function viewSeasonEnd(){
       <div class="card-title">Podio Costruttori</div>
       ${constructorsPodium.map(([name,pts],i)=>{
         const isYou = name==='YOU';
-        const label = isYou ? (state.team.name || 'La tua Scuderia') : name;
+        const label = isYou ? displayTeamName() : name;
         return `<div class="standing-row ${isYou?'you':''}"><div class="p">${medals[i]}</div><div>${label}</div><div class="pt">${Math.round(pts)}</div></div>`;
       }).join('')}
     </div>
@@ -1095,6 +2079,14 @@ function viewSeasonEnd(){
         return `<div class="standing-row ${isYou?'you':''}"><div class="p">${medals[i]}</div><div><div>${name}</div>${teamLabel?`<div style="font-size:9px;color:var(--muted2);">${teamLabel}</div>`:''}</div><div class="pt">${Math.round(pts)}</div></div>`;
       }).join('')}
     </div>
+    ${(()=>{
+      const swaps = (state.seasonRosterEvents||[]).filter(e=>e.inId);
+      if(!swaps.length) return '';
+      return `<div class="card">
+      <div class="card-title">Cambi di Formazione</div>
+      ${swaps.map(e=>`<div style="font-size:12px;color:var(--muted);padding:6px 0;border-bottom:1px solid var(--line);"><span style="color:var(--red);">${e.outName}</span> (${Math.round(e.outPts)} pt) → <span style="color:var(--green);">${e.inName}</span></div>`).join('')}
+      </div>`;
+    })()}
     <div class="card">
       <div class="card-title">Premi & Sviluppo</div>
       <div style="font-size:12px;color:var(--muted);line-height:1.7;">
@@ -1120,10 +2112,11 @@ function render(){
     const tab = state.activeTab;
     if(tab==='home') html += viewHome();
     else if(tab==='garage') html += viewGarage();
-    else if(tab==='sponsor') html += viewSponsors();
     else if(tab==='race') html += viewRace();
     else if(tab==='standings' || tab==='standings-c') html += viewStandings();
     else if(tab==='career') html += viewCareer();
+    else if(tab==='midmarket') html += viewMidSeasonMarket();
+    else if(tab==='finance' || tab==='finance-loan' || tab==='finance-investor') html += viewFinance();
     else html += viewHome();
   }
   html += viewBottomNav();
@@ -1140,7 +2133,130 @@ function render(){
       </div>
     </div>`;
   }
+  if(state.pendingRescindDriverId){
+    const d = driverById(state.pendingRescindDriverId);
+    html += `
+    <div class="modal-overlay">
+      <div class="modal-box">
+        <h3>Rescindere il contratto?</h3>
+        <p>${d?d.name:'Il pilota'} lascerà la squadra immediatamente, senza rimborso. Dovrai ingaggiare un sostituto prima del prossimo weekend di gara.</p>
+        <div class="modal-actions">
+          <button class="btn btn-outline" onclick="Actions.cancelRescind()">Annulla</button>
+          <button class="btn btn-primary" style="background:var(--red);" onclick="Actions.confirmRescind()">Rescindi</button>
+        </div>
+      </div>
+    </div>`;
+  }
   document.getElementById('app').innerHTML = html;
+  const onReadyScreen = state.raceStage==='qualiSkill' && state.skillIndex===0 && !state.qualiFirstLaunched;
+  if(state.phase==='season' && state.activeTab==='race' && (state.raceStage==='qualiSkill' || state.raceStage==='raceSkill') && !onReadyScreen){
+    initSkillCheckRound();
+  }
+  if(state.phase==='season' && state.activeTab==='race' && state.raceStage==='raceStart'){
+    initRaceStartRound();
+  }
+}
+
+/* =============================== BRAKING POINT MINI-GAME (qualifying) =============================== */
+// A car makes one pass toward the corner (no back-and-forth): tap FRENA while
+// it's inside the green zone. Runs independently of the render cycle (pure
+// CSS animation + timestamp math), so tapping doesn't need a re-render.
+function initSkillCheckRound(){
+  const zoneWidth = 14 + Math.random()*6; // 14-20% wide braking zone
+  const zoneStart = 40 + Math.random()*(78 - zoneWidth - 40); // braking happens in the back half, before the corner
+  // slightly faster (harder) as the sequence goes on
+  const duration = Math.max(750, 1150 - state.skillIndex*35 - Math.random()*150);
+  window.__skillCheckState = { startTime: Date.now(), duration, zoneStart, zoneWidth, resolved:false };
+  const zoneEl = document.getElementById('brakeZone');
+  const carEl = document.getElementById('brakeCar');
+  if(zoneEl){ zoneEl.style.left = zoneStart+'%'; zoneEl.style.width = zoneWidth+'%'; }
+  if(carEl){
+    carEl.style.left = '0%';
+    carEl.style.animation = `brakemove ${duration}ms linear forwards`;
+  }
+  const fb = document.getElementById('skillFeedback');
+  if(fb) fb.textContent = '';
+}
+
+function handleSkillCheckTap(){
+  const s = window.__skillCheckState;
+  if(!s || s.resolved) return;
+  s.resolved = true;
+  const elapsed = Date.now() - s.startTime;
+  const pos = Math.min(100, (elapsed/s.duration)*100);
+  const success = pos >= s.zoneStart && pos <= (s.zoneStart + s.zoneWidth);
+  const tooEarly = pos < s.zoneStart;
+  const fb = document.getElementById('skillFeedback');
+  if(fb){
+    fb.textContent = success ? 'FRENATA PERFETTA ✓' : (tooEarly ? 'FRENATA ANTICIPATA ✗' : 'FRENATA TARDIVA ✗');
+    fb.style.color = success ? 'var(--green)' : 'var(--red)';
+  }
+  const carEl = document.getElementById('brakeCar');
+  if(carEl){ carEl.style.animation = 'none'; carEl.style.left = pos+'%'; carEl.style.filter = success ? 'none' : 'grayscale(0.5)'; }
+  setTimeout(()=>{ Actions.recordSkillCheck(success); }, 550);
+}
+
+/* =============================== RACE START LIGHTS (F1 reaction test) =============================== */
+function clearRaceStartTimers(){
+  if(window.__raceStartTimers){ window.__raceStartTimers.forEach(t=>clearTimeout(t)); }
+  window.__raceStartTimers = [];
+}
+
+function initRaceStartRound(){
+  clearRaceStartTimers();
+  const startTime = Date.now();
+  const allOnAt = 2500; // 5 lights, 500ms apart
+  const holdTime = 400 + Math.random()*2200; // random hold before extinguish, like real F1
+  const extinguishAt = allOnAt + holdTime;
+  window.__raceStartState = { startTime, allOnAt, extinguishAt, resolved:false };
+  window.__raceStartTimers = [];
+  for(let i=1;i<=5;i++){
+    const timer = setTimeout(()=>{
+      const el = document.getElementById('light'+i);
+      if(el) el.classList.add('on');
+    }, i*500);
+    window.__raceStartTimers.push(timer);
+  }
+  const extTimer = setTimeout(()=>{
+    for(let i=1;i<=5;i++){
+      const el = document.getElementById('light'+i);
+      if(el) el.classList.remove('on');
+    }
+  }, extinguishAt);
+  window.__raceStartTimers.push(extTimer);
+  const fb = document.getElementById('raceStartFeedback');
+  if(fb) fb.textContent = '';
+}
+
+function handleRaceStartTap(){
+  const s = window.__raceStartState;
+  if(!s || s.resolved) return;
+  s.resolved = true;
+  clearRaceStartTimers();
+  const elapsed = Date.now() - s.startTime;
+  let type, reactionMs = 0;
+  if(elapsed < s.extinguishAt){
+    type = 'jumpstart';
+  } else {
+    reactionMs = elapsed - s.extinguishAt;
+    if(reactionMs < 200) type = 'perfect';
+    else if(reactionMs < 450) type = 'good';
+    else if(reactionMs < 900) type = 'slow';
+    else type = 'verySlow';
+  }
+  // make sure the lights end up visually off regardless of when the tap landed
+  for(let i=1;i<=5;i++){
+    const el = document.getElementById('light'+i);
+    if(el) el.classList.remove('on');
+  }
+  const labels = { jumpstart:'🚫 PARTENZA ANTICIPATA!', perfect:'⚡ PARTENZA PERFETTA!', good:'✅ Buona partenza', slow:'⏱️ Partenza lenta', verySlow:'🐢 Partenza molto lenta' };
+  const colors = { jumpstart:'var(--red)', perfect:'var(--green)', good:'var(--green)', slow:'var(--amber)', verySlow:'var(--red)' };
+  const fb = document.getElementById('raceStartFeedback');
+  if(fb){
+    fb.textContent = labels[type] + (type!=='jumpstart' ? ` (${reactionMs}ms)` : '');
+    fb.style.color = colors[type];
+  }
+  setTimeout(()=>{ Actions.recordRaceStart(type, reactionMs); }, 700);
 }
 
 /* =============================== INIT =============================== */
